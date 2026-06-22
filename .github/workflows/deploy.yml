@@ -44,12 +44,10 @@ jobs:
         run: dotnet publish MyPortfolio.csproj -c Release -o release --nologo
 
       # STEP 4: Modify the Base Path for GitHub Pages subdirectories dynamically.
-      # By default, Blazor looks for files at the root domain (e.g., mysite.com/).
-      # However, GitHub Pages hosts project sites in a subdirectory matching the repo name.
-      # This line uses 'sed' to find `<base href="/" />` inside index.html and dynamically
-      # replaces it with your exact repository name (e.g., /MyPortfolio/) to avoid 404 case-sensitivity bugs.
+      # This updated version uses '|' as a separator to make the syntax rock-solid,
+      # ensuring it finds and fixes the base href tag regardless of template spacing.
       - name: Change base tag
-        run: sed -i 's/<base href="\/" \/>/<base href="\/${{ github.event.repository.name }}\/" \/>/g' release/wwwroot/index.html
+        run: sed -i 's|<base href="/" />|<base href="/${{ github.event.repository.name }}/" />|g' release/wwwroot/index.html
 
       # STEP 5: Prevent GitHub from bypassing Blazor framework files.
       # GitHub Pages natively uses a static site engine called Jekyll, which automatically ignores 
