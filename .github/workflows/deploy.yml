@@ -7,8 +7,8 @@ on:
     # This script will only fire off when a push happens specifically on the 'main' branch.
     branches: [ main ]
 
-# NEW: This gives the automation runner explicit permission to write 
-# the compiled files back into a new deployment branch.
+# PERMISSIONS: Gives the automation runner explicit clearance to write 
+# the compiled web files back into the isolated 'gh-pages' deployment branch.
 permissions:
   contents: write
 
@@ -43,15 +43,23 @@ jobs:
       - name: Publish .NET Core Project
         run: dotnet publish MyPortfolio.csproj -c Release -o release --nologo
 
-      # STEP 4: Modify the Base Path for GitHub Pages subdirectories.
+      # STEP 4: Modify the Base Path for GitHub Pages subdirectories dynamically.
       # By default, Blazor looks for files at the root domain (e.g., mysite.com/).
-      # However, GitHub Pages hosts project sites in a subdirectory (e.g., username.github.io/portfolio/).
-      # This line uses 'sed' (a Linux stream editor) to find `<base href="/" />` inside index.html 
-      # and swap it out for `<base href="/portfolio/" />` so your files load correctly.
+      # However, GitHub Pages hosts project sites in a subdirectory matching the repo name.
+      # This line uses 'sed' to find `<base href="/" />` inside index.html and dynamically
+      # replaces it with your exact repository name (e.g., /MyPortfolio/) to avoid 404 case-sensitivity bugs.
       - name: Change base tag
-        run: sed -i 's/<base href="\/" \/>/<base href="\/portfolio\/" \/>/g' release/wwwroot/index.html
+        run: sed -i 's/<base href="\/" \/>/<base href="\/${{ github.event.repository.name }}\/" \/>/g' release/wwwroot/index.html
 
-      # STEP 5: Prevent 404 routing errors on page refreshes.
+      # STEP 5: Prevent GitHub from bypassing Blazor framework files.
+      # GitHub Pages natively uses a static site engine called Jekyll, which automatically ignores 
+      # any folder starting with an underscore. Because Blazor stores its core compiled web assets 
+      # inside a folder named '_framework', Jekyll breaks the site. Creating a blank '.nojekyll' 
+      # file tells GitHub to turn Jekyll off entirely and serve Blazor properly.
+      - name: Disable Jekyll
+        run: touch release/wwwroot/.nojekyll
+
+      # STEP 6: Prevent 404 routing errors on page refreshes.
       # Blazor handles routing internally on the client side. If a user is on your site and hits 
       # refresh, GitHub Pages thinks they are looking for a physical file that doesn't exist and throws a 404.
       # By copying index.html into a file named '404.html', GitHub will gracefully serve your Blazor 
@@ -59,7 +67,7 @@ jobs:
       - name: Fix 404 routing
         run: cp release/wwwroot/index.html release/wwwroot/404.html
 
-      # STEP 6: Push the compiled files to your deployment branch.
+      # STEP 7: Push the compiled files to your deployment branch.
       # This target action takes only the final static assets from the 'release/wwwroot' folder, 
       # strips out all the underlying raw C# code files, and automatically shoves them into a 
       # completely isolated branch in your repository named 'gh-pages'. 
