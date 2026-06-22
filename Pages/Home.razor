@@ -1,7 +1,5 @@
 ﻿@page "/"
 
-<PageTitle>Jay's Portfolio</PageTitle>
-
 <style>
     /* Visual Studio Code Dark+ Palette Overrides */
     .vs-keyword {
@@ -91,8 +89,8 @@
         <h1 class="h3 fw-bold text-uppercase tracking-wider vs-keyword mb-4">About Me</h1>
 
         <p class="lead vs-text fs-4 lh-lg m-0">
-            Hi, my name is <span class="vs-type fw-bold text-nowrap">Jay Panchal</span>.
-            I'm a <span class="vs-string fw-bold">software developer</span> specializing in robust backend systems,
+            Hi, my name is <span class="vs-string fw-bold text-nowrap">Jay Panchal</span>.
+            I'm a <span class="vs-type fw-bold">software developer</span> specializing in robust backend systems,
             complex data transformation pipelines, and automation tools. I bring four years of professional
             experience writing clean, deterministic, and maintainable code.
         </p>
@@ -109,11 +107,11 @@
             <div class="row mt-5">
                 <div class="col-md-6 mb-4">
                     <h3 class="h6 text-uppercase vs-comment fw-bold font-monospace mb-2">// Languages & Frameworks</h3>
-                    <p class="vs-text fs-5">C#, .NET Core, Blazor WebAssembly, Perl</p>
+                    <p class="vs-text fs-5">C#, .NET Core, Blazor WebAssembly</p>
                 </div>
                 <div class="col-md-6 mb-4">
                     <h3 class="h6 text-uppercase vs-comment fw-bold font-monospace mb-2">// Data & Automation</h3>
-                    <p class="vs-text fs-5">XML, XSLT, Content Transformation, Scripting</p>
+                    <p class="vs-text fs-5">HTML, XML, FO, XSLT, Scripting</p>
                 </div>
             </div>
         </details>
@@ -124,31 +122,31 @@
     <section class="mb-5">
         <details class="vs-toggle" open>
             <summary>
-                <h2 class="h3 fw-bold text-uppercase tracking-wider vs-keyword m-0 vs-toggle-heading">Selected Projects</h2>
+                <h2 class="h3 fw-bold text-uppercase tracking-wider vs-keyword m-0 vs-toggle-heading">Technical Projects</h2>
             </summary>
 
             <div class="mt-5">
                 <div class="project-entry mb-5 border-start border-2 vs-accent-line ps-4">
                     <div class="d-flex justify-content-between align-items-baseline flex-wrap mb-2">
-                        <h3 class="h4 fw-bold m-0 vs-type">aDocs — Enterprise Document Processing Pipeline</h3>
+                        <h3 class="h4 fw-bold m-0 vs-type">aDocs — Enterprise Document Processing Software</h3>
                         <span class="vs-comment font-monospace small">// C# • XML • XSLT • Perl • Core Automation</span>
                     </div>
 
                     <p class="vs-text my-3 lh-lg">
-                        An automated, high-volume data ingestion engine designed to process transactional banking statements (PDF/AFP formats) and synthesize them into specialized, legally compliant accessibility distributions like Large Print, Braille, and tagged PDFs.
+                        An automated, high-volume data ingestion engine designed to process transactional banking statements (PDF/AFP/txt formats) and synthesize them into specialized, legally compliant accessibility distributions like Large Print, Braille, audio, e-Text and tagged PDFs.
                     </p>
 
                     <div class="row pt-2">
                         <div class="col-md-6 mb-3">
                             <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">The Architecture</h4>
                             <p class="vs-text small lh-base">
-                                Extracts text from binary print streams into raw XML, executes multi-stage XSLT sanitization filters (<code class="vs-code-inline">xmlorig</code>), and uses a custom schema orchestrator (<code class="vs-code-inline">model.xml</code>) with regex-pattern matching to dynamically map layout structures.
+                                Extracts text from the input into raw XML, executes multi-stage XSLT sanitization filters (<code class="vs-code-inline">xmlorig</code>), and uses a custom schema orchestrator (<code class="vs-code-inline">model.xml</code>) with regex-pattern matching to dynamically map layout structures.
                             </p>
                         </div>
                         <div class="col-md-6 mb-3">
                             <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">Engineering Win</h4>
                             <p class="vs-text small lh-base">
-                                Diagnosed a critical throughput race condition via runtime execution logs. Refactored script orchestration to guarantee pre-filters trigger only post-file generation, restoring absolute pipeline stability and eliminating ingestion downtime.
+                                Resolved a critical concurrency bottleneck within the multi-threaded aDocs pipeline that caused abrupt runtime crashes during high-volume file processing. Under heavy data loads, the file extraction step experienced minor latency, creating a race condition where formatting filters were executed before the raw XML payload was fully generated. By injecting comprehensive diagnostic logging and analyzing complex runtime execution paths, I isolated the exact failure point and implemented deterministic execution checks to ensure pre-extraction filters trigger exclusively post-XML creation.
                             </p>
                         </div>
                     </div>
@@ -188,9 +186,11 @@
     <footer class="text-center py-4 mt-5">
         <p class="vs-comment font-monospace mb-3">// Let's connect.</p>
         <div class="d-flex justify-content-center gap-4">
-            <a href="https://github.com/yourusername" target="_blank" class="vs-keyword text-decoration-none fw-bold">GitHub</a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" class="vs-type text-decoration-none fw-bold">LinkedIn</a>
-            <a href="mailto:youremail@example.com" class="vs-string text-decoration-none fw-bold">Email</a>
+            <a href="https://github.com/Jaypncl" target="_blank" class="vs-keyword text-decoration-none fw-bold">GitHub</a>
+
+            <a href="https://linkedin.com/in/jaypncl" target="_blank" class="vs-type text-decoration-none fw-bold">LinkedIn</a>
+
+            <a href="@("mailto:jaypncl@protonmail.com")" class="vs-string text-decoration-none fw-bold">Email</a>
         </div>
     </footer>
 
