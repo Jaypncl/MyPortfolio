@@ -1,58 +1,197 @@
 ﻿@page "/"
 
-<div class="portfolio-container">
-    <!-- TOP NAVIGATION -->
-    <header class="navbar">
-        <div class="logo">Jay Panchal</div>
-        <nav>
-            <a href="#work">Work</a>
-            <a href="#experience">Experience</a>
-        </nav>
+<PageTitle>Jay's Portfolio</PageTitle>
+
+<style>
+    /* Visual Studio Code Dark+ Palette Overrides */
+    .vs-keyword {
+        color: #569CD6 !important;
+    }
+    /* IDE Blue (Keywords like public, class) */
+    .vs-type {
+        color: #4EC9B0 !important;
+    }
+    /* IDE Teal (Classes, Interfaces, Types) */
+    .vs-text {
+        color: #C586C0 !important;
+    }
+    /* IDE Purple/Pink (Control flow keywords like if, return, switch) */
+    .vs-comment {
+        color: #6A9955 !important;
+    }
+    /* IDE Green (Comments and documentation) */
+    .vs-string {
+        color: #CE9178 !important;
+    }
+    /* IDE Terracotta/Orange (Strings & Values) */
+    .vs-accent-line {
+        border-color: #569CD6 !important;
+    }
+    /* Blue vertical accent timeline */
+
+    /* Clean formatting for the inline code elements */
+    .vs-code-inline {
+        background-color: #2D2D2D !important;
+        color: #CE9178 !important;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+    /* Soften the bootstrap horizontal rules to match the dark environment */
+    .vs-hr {
+        border-color: #333333 !important;
+        opacity: 0.4;
+    }
+
+    /* IDE Interactive Toggle (Details/Summary) Styling */
+    .vs-toggle {
+        display: block;
+    }
+
+        .vs-toggle summary {
+            cursor: pointer;
+            list-style: none; /* Removes default browser arrow */
+            outline: none;
+            user-select: none;
+        }
+
+            /* Hide default arrow for WebKit/Safari browsers */
+            .vs-toggle summary::-webkit-details-marker {
+                display: none;
+            }
+
+            /* Custom VS Code style folding arrow indicator */
+            .vs-toggle summary::before {
+                content: "▶";
+                color: #858585;
+                display: inline-block;
+                margin-right: 12px;
+                font-size: 0.95rem;
+                transition: transform 0.1s ease;
+                vertical-align: middle;
+            }
+
+        /* Rotate the indicator arrow when the code block is expanded/open */
+        .vs-toggle[open] summary::before {
+            transform: rotate(90deg);
+            color: #569CD6; /* Turns IDE Blue when active */
+        }
+
+    /* Keep heading baseline aligned with the toggle arrow */
+    .vs-toggle-heading {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="container max-width-md my-5 py-3">
+
+    <header class="mb-5">
+        <h1 class="h3 fw-bold text-uppercase tracking-wider vs-keyword mb-4">About Me</h1>
+
+        <p class="lead vs-text fs-4 lh-lg m-0">
+            Hi, my name is <span class="vs-type fw-bold text-nowrap">Jay Panchal</span>.
+            I'm a <span class="vs-string fw-bold">software developer</span> specializing in robust backend systems,
+            complex data transformation pipelines, and automation tools. I bring four years of professional
+            experience writing clean, deterministic, and maintainable code.
+        </p>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <h1>Crafting reliable backend solutions.</h1>
-        <p class="subtitle">Software Developer specializing in C# with a focus on system efficiency, code quality, and performance.</p>
-    </section>
+    <hr class="vs-hr my-5" />
 
-    <!-- WORK/PROJECTS GRID -->
-    <section id="work" class="section">
-        <h2 class="section-title">Selected Work</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>System Reliability</h3>
-                <p>Resolved over 20 critical production defects within strict 24-hour SLAs, effectively reducing system downtime by 20%.</p>
-            </div>
-            <div class="card">
-                <h3>Accessibility Engineering</h3>
-                <p>Designed software utilizing C#, Perl, XML, and XSLT to process bank statements into accessible formats like Large Print and Braille.</p>
-            </div>
-            <div class="card">
-                <h3>Performance Optimization</h3>
-                <p>Lead code reviews and successfully refactored complex multi-threaded bugs to ensure peak system performance.</p>
-            </div>
-        </div>
-    </section>
+    <section class="mb-5">
+        <details class="vs-toggle" open>
+            <summary>
+                <h2 class="h3 fw-bold text-uppercase tracking-wider vs-keyword m-0 vs-toggle-heading">Core Expertise</h2>
+            </summary>
 
-    <!-- MINIMALIST TIMELINE -->
-    <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-meta">2022 — Present</div>
-                <div class="timeline-content">
-                    <h3>Software Developer</h3>
-                    <p>3 years building and maintaining reliable enterprise software.</p>
+            <div class="row mt-5">
+                <div class="col-md-6 mb-4">
+                    <h3 class="h6 text-uppercase vs-comment fw-bold font-monospace mb-2">// Languages & Frameworks</h3>
+                    <p class="vs-text fs-5">C#, .NET Core, Blazor WebAssembly, Perl</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h3 class="h6 text-uppercase vs-comment fw-bold font-monospace mb-2">// Data & Automation</h3>
+                    <p class="vs-text fs-5">XML, XSLT, Content Transformation, Scripting</p>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-meta">2020 — 2022</div>
-                <div class="timeline-content">
-                    <h3>Overnight Fulfillment Associate</h3>
-                    <p>Walmart</p>
+        </details>
+    </section>
+
+    <hr class="vs-hr my-5" />
+
+    <section class="mb-5">
+        <details class="vs-toggle" open>
+            <summary>
+                <h2 class="h3 fw-bold text-uppercase tracking-wider vs-keyword m-0 vs-toggle-heading">Selected Projects</h2>
+            </summary>
+
+            <div class="mt-5">
+                <div class="project-entry mb-5 border-start border-2 vs-accent-line ps-4">
+                    <div class="d-flex justify-content-between align-items-baseline flex-wrap mb-2">
+                        <h3 class="h4 fw-bold m-0 vs-type">aDocs — Enterprise Document Processing Pipeline</h3>
+                        <span class="vs-comment font-monospace small">// C# • XML • XSLT • Perl • Core Automation</span>
+                    </div>
+
+                    <p class="vs-text my-3 lh-lg">
+                        An automated, high-volume data ingestion engine designed to process transactional banking statements (PDF/AFP formats) and synthesize them into specialized, legally compliant accessibility distributions like Large Print, Braille, and tagged PDFs.
+                    </p>
+
+                    <div class="row pt-2">
+                        <div class="col-md-6 mb-3">
+                            <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">The Architecture</h4>
+                            <p class="vs-text small lh-base">
+                                Extracts text from binary print streams into raw XML, executes multi-stage XSLT sanitization filters (<code class="vs-code-inline">xmlorig</code>), and uses a custom schema orchestrator (<code class="vs-code-inline">model.xml</code>) with regex-pattern matching to dynamically map layout structures.
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">Engineering Win</h4>
+                            <p class="vs-text small lh-base">
+                                Diagnosed a critical throughput race condition via runtime execution logs. Refactored script orchestration to guarantee pre-filters trigger only post-file generation, restoring absolute pipeline stability and eliminating ingestion downtime.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-entry mb-5 border-start border-2 vs-accent-line ps-4">
+                    <div class="d-flex justify-content-between align-items-baseline flex-wrap mb-2">
+                        <h3 class="h4 fw-bold m-0 vs-type">Automated Data Validation & Ingestion Utility</h3>
+                        <span class="vs-comment font-monospace small">// C# • .NET Core • Data Automation • I/O Optimization</span>
+                    </div>
+
+                    <p class="vs-text my-3 lh-lg">
+                        A standalone C# automation utility that streamlines corporate client onboarding by eliminating manual file verification, extracting structural identity keys, and executing dynamic file-system routing rules.
+                    </p>
+
+                    <div class="row pt-2">
+                        <div class="col-md-6 mb-3">
+                            <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">The Workflow</h4>
+                            <p class="vs-text small lh-base">
+                                Programmatically extracts unique identity keys from raw client media, streams associated CSV manifests to execute lookups, and automatically mutates file nomenclature (e.g., prepending <code class="small vs-code-inline">LPR_</code>) to govern downstream compiler behavior.
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h4 class="h6 text-uppercase fw-bold vs-keyword small tracking-wide mb-2">Business Impact</h4>
+                            <p class="vs-text small lh-base">
+                                Replaced a highly manual, error-prone monthly auditing process with a multi-threaded console application. Reduced processing cycles from hours to seconds, eliminated keying risks, and integrated an exception-logging module to isolate data anomalies instantly.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </details>
     </section>
+
+    <hr class="vs-hr my-5" />
+
+    <footer class="text-center py-4 mt-5">
+        <p class="vs-comment font-monospace mb-3">// Let's connect.</p>
+        <div class="d-flex justify-content-center gap-4">
+            <a href="https://github.com/yourusername" target="_blank" class="vs-keyword text-decoration-none fw-bold">GitHub</a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" class="vs-type text-decoration-none fw-bold">LinkedIn</a>
+            <a href="mailto:youremail@example.com" class="vs-string text-decoration-none fw-bold">Email</a>
+        </div>
+    </footer>
+
 </div>
