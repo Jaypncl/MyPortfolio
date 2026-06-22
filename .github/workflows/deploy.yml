@@ -1,0 +1,66 @@
+# The name that will show up in the "Actions" tab at the top of your GitHub repository page.
+name: Deploy to GitHub Pages
+
+# TRIGGER: This defines WHAT tells GitHub to run this script.
+on:
+  push:
+    # This script will only fire off when a push happens specifically on the 'main' branch.
+    branches: [ main ]
+
+# JOBS: The actual work modules that GitHub will execute.
+jobs:
+  deploy-to-github-pages:
+    # The operating system environment GitHub provisions for you in the cloud. 
+    # Ubuntu (Linux) is used here because it is fast, lightweight, and spins up in seconds.
+    runs-on: ubuntu-latest
+
+    # STEPS: The sequential checklist of commands executed inside that Ubuntu environment.
+    steps:
+      
+      # STEP 1: Pull down your source code.
+      # GitHub starts with a completely empty machine. This action clones your repository 
+      # files into the virtual runner so the subsequent steps can access your code.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # STEP 2: Install the .NET SDK framework.
+      # To compile a Blazor application, the system needs the C# compiler tools. 
+      # This step installs the .NET 8 SDK onto the virtual machine.
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' 
+
+      # STEP 3: Compile and publish the Blazor app.
+      # This runs the standard .NET build command. It takes your C#, HTML, and CSS, compiles it, 
+      # and outputs clean, production-ready web files into a temporary folder named "release".
+      # '--nologo' just keeps the terminal output clean.
+      - name: Publish .NET Core Project
+        run: dotnet publish MyPortfolio.csproj -c Release -o release --nologo
+
+      # STEP 4: Modify the Base Path for GitHub Pages subdirectories.
+      # By default, Blazor looks for files at the root domain (e.g., mysite.com/).
+      # However, GitHub Pages hosts project sites in a subdirectory (e.g., username.github.io/portfolio/).
+      # This line uses 'sed' (a Linux stream editor) to find `<base href="/" />` inside index.html 
+      # and swap it out for `<base href="/portfolio/" />` so your files load correctly.
+      - name: Change base tag
+        run: sed -i 's/<base href="\/" \/>/<base href="\/portfolio\/" \/>/g' release/wwwroot/index.html
+
+      # STEP 5: Prevent 404 routing errors on page refreshes.
+      # Blazor handles routing internally on the client side. If a user is on your site and hits 
+      # refresh, GitHub Pages thinks they are looking for a physical file that doesn't exist and throws a 404.
+      # By copying index.html into a file named '404.html', GitHub will gracefully serve your Blazor 
+      # router instead of a broken error page when someone refreshes.
+      - name: Fix 404 routing
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+      # STEP 6: Push the compiled files to your deployment branch.
+      # This target action takes only the final static assets from the 'release/wwwroot' folder, 
+      # strips out all the underlying raw C# code files, and automatically shoves them into a 
+      # completely isolated branch in your repository named 'gh-pages'. 
+      # GitHub Pages then listens directly to that specific branch to render your live web link.
+      - name: Commit files to GitHub Pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: release/wwwroot
