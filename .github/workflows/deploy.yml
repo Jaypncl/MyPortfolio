@@ -7,6 +7,11 @@ on:
     # This script will only fire off when a push happens specifically on the 'main' branch.
     branches: [ main ]
 
+# NEW: This gives the automation runner explicit permission to write 
+# the compiled files back into a new deployment branch.
+permissions:
+  contents: write
+
 # JOBS: The actual work modules that GitHub will execute.
 jobs:
   deploy-to-github-pages:
